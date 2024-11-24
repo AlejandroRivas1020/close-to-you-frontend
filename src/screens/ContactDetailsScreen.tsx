@@ -47,10 +47,7 @@ const ContactDetailsScreen: React.FC<ContactDetailsScreenProps> = ({ route, navi
   const handleEdit = () => {
     navigation.navigate('EditContact', {
       contactId,
-      onSave: (updatedContact: typeof contactDetails) => {
-        setContactDetails(updatedContact);
-      },
-    });
+      });
   };
 
   const handleDelete = async () => {

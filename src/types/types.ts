@@ -1,5 +1,3 @@
-import { ContactDetails } from '../hooks/useContactDetails';
-
 export type RootStackParamList = {
   Home: undefined;
   Onboarding: undefined;
@@ -8,5 +6,5 @@ export type RootStackParamList = {
   AddContact: { onContactAdded: () => void };
   ContactList: { refresh?: boolean };
   ContactDetails: { contactId: string };
-  EditContact: { contactId: string; onSave: (updatedContact: ContactDetails | null) => void;  };
+  EditContact: { contactId: string };
 };

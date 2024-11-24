@@ -3,10 +3,14 @@ import { View, Text, TextInput, StyleSheet, Alert, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import useEditContact from '../hooks/useEditContact';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import CustomButton from '../components/CustomButton'; // Importa CustomButton
+import CustomButton from '../components/CustomButton';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types/types';
+
+type NavigationProp = StackNavigationProp<RootStackParamList, 'EditContact'>;
 
 const EditContactScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const route = useRoute();
   const { contactId } = route.params as { contactId: string };
 
@@ -14,7 +18,7 @@ const EditContactScreen: React.FC = () => {
 
   const onSuccess = () => {
     Alert.alert('Success', 'Contact updated successfully!');
-    navigation.goBack();
+    navigation.navigate('ContactList',{refresh: true});
   };
 
   const {

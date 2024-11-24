@@ -37,7 +37,7 @@ const ContactFormScreen: React.FC<ContactFormScreenProps> = ({ navigation, route
   } = useContactForm(
     async () => {
       Alert.alert('Success', 'Contact created successfully!');
-      // Obtener el callback configurado como parámetro en la navegación
+
       const callback = route.params?.onContactAdded;
       if (callback) {
         callback();
@@ -74,7 +74,11 @@ const ContactFormScreen: React.FC<ContactFormScreenProps> = ({ navigation, route
     const { latitude, longitude } = e.nativeEvent.coordinate;
     handleInputChange('latitude', latitude);
     handleInputChange('longitude', longitude);
-    setRegion({ ...region, latitude, longitude });
+    setRegion((prevRegion) => ({
+      ...prevRegion,
+      latitude,
+      longitude,
+    }));
   };
 
   const handleTakePhotoWithPermission = async () => {

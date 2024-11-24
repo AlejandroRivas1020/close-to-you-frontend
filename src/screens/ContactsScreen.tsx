@@ -11,6 +11,7 @@ import {
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/types';
 import useContacts from '../hooks/useContacts';
+import { useFocusEffect } from '@react-navigation/native';
 
 type ContactsScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ContactList'>;
 
@@ -23,9 +24,15 @@ const ContactsScreen: React.FC<ContactsScreenProps> = ({ navigation }) => {
 
   const handleNavigateToCreateContact = () => {
     navigation.navigate('AddContact', {
-      onContactAdded: fetchContacts,
+      onContactAdded: () => fetchContacts(),
     });
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchContacts();
+    }, [])
+  );
 
   const handleNavigateToContactDetail = (id: string) => {
     navigation.navigate('ContactDetails', { contactId: id});
